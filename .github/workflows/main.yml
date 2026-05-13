@@ -1,16 +1,24 @@
 name: Download Model
 on: [workflow_dispatch]
+
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Download Model File
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download Model
         run: |
-          curl -L -o Phi-3-mini-Q4.gguf https://huggingface.co/bartowski/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-v0.Q4_K_M.gguf?download=true
-      - name: Upload to Release
+          curl -L "https://huggingface.co/bartowski/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-v0.Q4_K_M.gguf" -o Phi-3-mini-Q4.gguf
+
+      - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           files: Phi-3-mini-Q4.gguf
-          tag_name: v${{ github.run_number }}
+          tag_name: "v${{ github.run_number }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
