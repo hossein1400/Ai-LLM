@@ -13,4 +13,3 @@ jobs:
           name: phi3-model
           path: Phi-3.gguf
           retention-days: 1
-          
