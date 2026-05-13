@@ -1,15 +1,13 @@
-name: Model-Downloader-New
+name: Downloader
 on: workflow_dispatch
 jobs:
-  download:
+  job1:
     runs-on: ubuntu-latest
     steps:
-      - name: Download Model
-        run: |
-          curl -L "https://huggingface.co/bartowski/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-v0.Q4_K_M.gguf" -o Phi-3.gguf
-      - name: Upload Artifact
+      - name: step1
+        run: curl -L "https://huggingface.co/bartowski/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-v0.Q4_K_M.gguf" -o model.gguf
+      - name: step2
         uses: actions/upload-artifact@v4
         with:
-          name: phi3-model
-          path: Phi-3.gguf
-          retention-days: 1
+          name: phi3-file
+          path: model.gguf
