@@ -1,0 +1,15 @@
+name: Download Model
+on: [workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download from HF
+        run: wget -O Phi-3-mini-Q4.gguf https://huggingface.co/bartowski/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-v0.Q4_K_M.gguf
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: Phi-3-mini-Q4.gguf
+          tag_name: v1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
