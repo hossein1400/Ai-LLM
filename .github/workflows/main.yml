@@ -1,7 +1,7 @@
-name: Downloader
+name: GetModel
 on: workflow_dispatch
 jobs:
-  job1:
+  download:
     runs-on: ubuntu-latest
     steps:
       - name: step1
@@ -9,5 +9,5 @@ jobs:
       - name: step2
         uses: actions/upload-artifact@v4
         with:
-          name: phi3-file
+          name: phi3-model
           path: model.gguf
